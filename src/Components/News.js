@@ -44,7 +44,6 @@ export default class News extends Component{
     ]
     constructor(){
         super();
-        console.log("Constructor called!!");
         this.state = {
             articles: this.articles,
             loading: false
@@ -56,7 +55,7 @@ export default class News extends Component{
             <h1>Newscoop - Top Headlines</h1>
             <div className="row">
                 {this.state.articles.map((element)=>{return <div className="col-md-4" key={element.url}>
-                    <NewsItem title={element.title} description={element.description} imageUrl={element.urlToImage} newsUrl={element.url}/>
+                    <NewsItem title={element.title.slice(0, 40)} description={element.description.slice(0, 100)} imageUrl={element.urlToImage} newsUrl={element.url}/>
                 </div>})}
             </div>
             </div>
