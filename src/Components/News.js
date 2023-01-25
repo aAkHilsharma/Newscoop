@@ -10,25 +10,27 @@ export default class News extends Component{
         }
     }
     async componentDidMount() {
-        let url  = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=7385c9251e4543b1a42fdeacdbbd1a11";
+        let url  = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&pageSize=20";
         let data = await fetch(url);
         let parsedData = await data.json();
-        this.setState ({articles : parsedData.articles});
+        this.setState ({articles : parsedData.articles, totalResults: parsedData.totalResults});
     }
     truncate = (input) =>
          input?.length > 45? `${input.substring(0, 45)}...` : input;
     reduce = (input) =>
          input?.length > 100? `${input.substring(0, 100)}...` : input;
     handleNextClick = async()=>{
-        let url  = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${this.state.page + 1}`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        this.setState ({articles : parsedData.articles,
+        if(!(this.state.page+1 > Math.ceil(this.state.totalResults / 20))){
+            let url  = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${this.state.page + 1}&pageSize=20`;
+            let data = await fetch(url);
+            let parsedData = await data.json();
+            this.setState ({articles : parsedData.articles,
             page : this.state.page+ 1
         });
+        }
     }
     handlePrevClick = async()=>{
-        let url  = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${this.state.page - 1}`;
+        let url  = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${this.state.page - 1}&pageSize=20`;
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState ({articles : parsedData.articles,
