@@ -3,7 +3,7 @@ import { Component } from "react";
 export default class Navbar extends Component{
     render(){
         return(
-            <nav className="navbar navbar-expand-lg" style={{backgroundColor: "#e3f2fd"}}>
+            <nav className="navbar navbar-dark bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/link">Newscoop</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

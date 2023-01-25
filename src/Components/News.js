@@ -40,7 +40,7 @@ export default class News extends Component{
     render(){
         return(
             <div className="container my-3">
-            <h1>Newscoop - Top Headlines</h1>
+            <h1 className="text-center">Newscoop - Top Headlines</h1>
             <div className="row">
                 {this.state.articles.map((element)=>{return <div className="col-md-4" key={element.url}>
                     <NewsItem title={this.truncate(element.title)} description={this.reduce(element.description)} imageUrl={element.urlToImage} newsUrl={element.url}/>
