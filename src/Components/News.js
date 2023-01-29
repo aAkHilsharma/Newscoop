@@ -14,7 +14,7 @@ export default class News extends Component{
         pageSize : PropTypes.number,
         category : PropTypes.string
     }
-    caps = (string)=>{
+    capsFirst = (string)=>{
         return string.charAt(0).toUpperCase()+string.slice(1); 
     }
     constructor(props){
@@ -24,7 +24,7 @@ export default class News extends Component{
             loading: false,
             page: 1
         }
-        document.title = `Newscoop - ${this.caps(this.props.category)}`
+        document.title = `Newscoop - ${this.capsFirst(this.props.category)}`
     }
     async updateNews(){
         const url  = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${this.state.page}&pageSize=${this.props.pageSize}`;
@@ -57,7 +57,7 @@ export default class News extends Component{
     render(){
         return(
             <div className="container my-3">
-            <h1 className="text-center my-4">Newscoop - Top Headlines</h1>
+            <h1 className="text-center my-4">Top {this.capsFirst(this.props.category)} Headlines</h1>
             {this.state.loading && <Spinner />}
             <div className="row">
                 {!this.state.loading && this.state.articles.map((element)=>{return <div className="col-md-4" key={element.url}>
