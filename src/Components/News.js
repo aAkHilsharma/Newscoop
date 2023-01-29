@@ -30,15 +30,19 @@ export default class News extends Component {
     document.title = `Newscoop - ${this.capsFirst(this.props.category)}`;
   }
   async updateNews() {
+    this.props.setProgress(10);
     const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
+    this.props.setProgress(30);
     let data = await fetch(url);
+    this.props.setProgress(50);
     let parsedData = await data.json();
     this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-      loading: false,
+        articles: parsedData.articles,
+        totalResults: parsedData.totalResults,
+        loading: false,
     });
+    this.props.setProgress(100);
   }
   async componentDidMount() {
     this.updateNews();
@@ -67,7 +71,7 @@ export default class News extends Component {
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
-          hasMore={this.state.articles.length !== this.state.totalResults}
+          hasMore={this.state.articles.length !== this.state.totalResults}  
           loader={<Spinner />}
         >
         <div className="container my-3">
