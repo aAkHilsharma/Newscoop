@@ -59,7 +59,7 @@ export default class News extends Component {
   }
   render() {
     return (
-      <div className="container my-3">
+      <>
         <h1 className="text-center my-4">
           Top {this.capsFirst(this.props.category)} Headlines
         </h1>
@@ -70,6 +70,7 @@ export default class News extends Component {
           hasMore={this.state.articles.length !== this.state.totalResults}
           loader={<Spinner />}
         >
+        <div className="container my-3">
           <div className="row">
             {
               this.state.articles.map((element) => {
@@ -88,8 +89,9 @@ export default class News extends Component {
                 );
               })}
           </div>
+          </div>  
         </InfiniteScroll>
-      </div>
+      </>
     );
   }
 }
