@@ -23,7 +23,7 @@ export default class News extends Component {
     super(props);
     this.state = {
       articles: [],
-      loading: false,
+      loading: true,
       page: 1,
       totalResults: 0,
     };
@@ -67,7 +67,7 @@ export default class News extends Component {
         <h1 className="text-center my-4">
           Top {this.capsFirst(this.props.category)} Headlines
         </h1>
-        {/* {this.state.loading && <Spinner />} */}
+        {this.state.loading && <Spinner />}
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
