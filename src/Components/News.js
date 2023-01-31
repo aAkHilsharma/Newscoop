@@ -14,8 +14,7 @@ export default function News(props) {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-    // document.title = `Newscoop - ${this.capsFirst(this.props.category)}`;
-
+  
   const  updateNews = async ()=>{
     props.setProgress(10);
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${page}&pageSize=${props.pageSize}`;
@@ -29,8 +28,9 @@ export default function News(props) {
     setLoading(false);
     props.setProgress(100);
   }
-
+  
   useEffect(() => {
+    document.title = `Newscoop - ${capsFirst(props.category)}`;
     updateNews();
   }, [])
 
