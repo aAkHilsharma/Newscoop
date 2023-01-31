@@ -14,7 +14,7 @@ export default function News(props) {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-    // document.title = `Newscoop - ${this.capsFirst(props.category)}`;
+    // document.title = `Newscoop - ${this.capsFirst(this.props.category)}`;
 
   const  updateNews = async ()=>{
     props.setProgress(10);
@@ -38,8 +38,8 @@ export default function News(props) {
     input?.length > 100 ? `${input.substring(0, 100)}...` : input;
 
   const fetchMoreData = async()=>{
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${page+1}&pageSize=${props.pageSize}`;
     setPage(page + 1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=7385c9251e4543b1a42fdeacdbbd1a11&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true);
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -49,9 +49,12 @@ export default function News(props) {
   }
     return (
       <>
-        <h1 className="text-center my-4">
-          Top {capsFirst(props.category)} Headlines
-        </h1>
+        <div className="mt-4" style={{marginTop: "90px"}}>
+          <h1 className="text-center" style={{margin : "35px 0px",
+          marginTop : "90px"}}>
+            Top {capsFirst(props.category)} Headlines
+          </h1>
+        </div>
         {loading && <Spinner />}
         <InfiniteScroll
           dataLength={articles.length}
@@ -59,7 +62,7 @@ export default function News(props) {
           hasMore={articles.length !== totalResults}  
           loader={<Spinner />}
         >
-        <div className="container my-3">
+        <div className="container">
           <div className="row">
             {
               articles.map((element) => {
@@ -82,7 +85,7 @@ export default function News(props) {
         </InfiniteScroll>
       </>
     );
-}
+  }
 News.defaultProps = {
   country: "in",
   pageSize: 8,
