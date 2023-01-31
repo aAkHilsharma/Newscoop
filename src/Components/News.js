@@ -50,8 +50,7 @@ export default function News(props) {
     return (
       <>
         <div className="mt-4" style={{marginTop: "90px"}}>
-          <h1 className="text-center" style={{margin : "35px 0px",
-          marginTop : "90px"}}>
+          <h1 className="text-center" style={{margin : "90px 0px 35px 0px"}}>
             Top {capsFirst(props.category)} Headlines
           </h1>
         </div>
